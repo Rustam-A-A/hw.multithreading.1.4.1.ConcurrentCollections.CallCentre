@@ -1,6 +1,5 @@
 public class Operator{
     final private int CALL_TIME_FRAME = 3000;
-    private static int counter = 0;
     IncomingCall incomingCall;
 
     public Operator(IncomingCall incomingCall){
@@ -11,9 +10,8 @@ public class Operator{
         while(true){
             if (!incomingCall.currentCalls.isEmpty()){
                 System.out.println("Оператор " + Thread.currentThread().getName() +
-                        " принял звонок №" + (counter + 1) +
-                        " от абонента " + incomingCall.currentCalls.poll());
-                counter++;
+                        " принял звонок №" + incomingCall.currentCalls.poll().getCallNumber()+
+                        " от абонента " + incomingCall.currentCalls.poll().getPhoneNumber());
                 try {
                     Thread.sleep(CALL_TIME_FRAME);
                 } catch (InterruptedException e) {

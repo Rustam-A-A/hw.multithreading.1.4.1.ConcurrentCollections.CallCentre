@@ -1,17 +1,18 @@
 import java.util.concurrent.ArrayBlockingQueue;
 
 public class IncomingCall {
-    final private int CAPACITY = 140;
+    final private int CAPACITY = 200;
     final private int CALL_PERIOD = 100;
 
-    ArrayBlockingQueue<Integer> currentCalls = new ArrayBlockingQueue<Integer>(CAPACITY, true);
+    ArrayBlockingQueue<Call> currentCalls = new ArrayBlockingQueue<Call>(CAPACITY, true);
 
     public void call() {
         while (!Thread.currentThread().isInterrupted()){
-            Integer call = Call.generatePhoneNumber();
-            Integer counter = Call.countCalls();
+            Integer phoneNumber = Call.generatePhoneNumber();
+            int callNumber = Call.countCalls();
+            Call call = new Call(phoneNumber, callNumber);
             currentCalls.add(call);
-            System.out.println("Входящий звонок № " + counter + " номер " + call);
+            System.out.println("Входящий звонок № " + call.getCallNumber() + " номер " + call.getPhoneNumber());
             try {
                 Thread.sleep(CALL_PERIOD);
             } catch (InterruptedException e) {
