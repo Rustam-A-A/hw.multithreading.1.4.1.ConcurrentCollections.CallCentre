@@ -1,5 +1,6 @@
 public class Operator{
     final private int CALL_TIME_FRAME = 3000;
+    final private int CHECK_TIME = 1000;
     IncomingCall incomingCall;
 
     public Operator(IncomingCall incomingCall){
@@ -10,7 +11,7 @@ public class Operator{
         while(true){
             if (!incomingCall.currentCalls.isEmpty()){
                 System.out.println("Оператор " + Thread.currentThread().getName() +
-                        " принял звонок №" + incomingCall.currentCalls.poll().getCallNumber()+
+                        " принял звонок №" + incomingCall.currentCalls.poll().getCallNumber() +
                         " от абонента " + incomingCall.currentCalls.poll().getPhoneNumber());
                 try {
                     Thread.sleep(CALL_TIME_FRAME);
@@ -20,6 +21,11 @@ public class Operator{
             } else {
                 System.out.println("Необработанных звонков оператором " +
                         Thread.currentThread().getName() + " больше нет");
+                try {
+                    Thread.sleep(CHECK_TIME);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 break;
             }
         }

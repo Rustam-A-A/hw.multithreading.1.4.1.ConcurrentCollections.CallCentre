@@ -10,11 +10,16 @@ public class Main {
         Thread incomingCalls = new Thread(null, incomingCall::call ,"Входящие звонки");
         incomingCalls.start();
 
-        //Время необходимое для начального формирования очереди
-        try {
-            Thread.sleep(TIME_TO_START);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+
+        //Проверка наличия входящих звонков и выделение необходимого времени
+        // для начального формирования очереди
+        while (incomingCall.currentCalls.isEmpty()) {
+            System.out.println("пока звонков нет");
+            try {
+                Thread.sleep(TIME_TO_START);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
 
         new Thread(null, operator::takeCall, "Anton").start();
