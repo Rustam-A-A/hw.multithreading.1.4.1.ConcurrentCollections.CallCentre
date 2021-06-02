@@ -1,8 +1,8 @@
 public class Call {
     private static double DECIMALS = 10000000;
     Integer phoneNumber;
-    int callNumber;
-    static int countCalls = 0;
+    private int callNumber;
+    private static int countCalls = 0;
 
     public Call(Integer phoneNumber){
         this.phoneNumber = phoneNumber;
@@ -33,6 +33,7 @@ public class Call {
         Integer phoneNumber = (int) Math.round((Math.random()*DECIMALS));
         return phoneNumber;
     }
+
     public static Integer countCalls(){
         countCalls++;
         return countCalls;

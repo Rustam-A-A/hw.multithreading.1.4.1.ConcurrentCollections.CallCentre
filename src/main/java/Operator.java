@@ -26,7 +26,7 @@ public class Operator{
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                break;
+               break;
             }
         }
     }
